@@ -1,3 +1,10 @@
+/**
+ * @file 4_move_copy_swap1.cpp
+ * @brief copy and swap, copy assignment / move assignment 使用 swap 交换数据
+ * @author Albert
+ * @version 1.0.0
+ * @date 2024-11-21
+ */
 #include <iostream>
 #include <vector>
 using namespace std;

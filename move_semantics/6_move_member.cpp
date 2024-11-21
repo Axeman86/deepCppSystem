@@ -1,3 +1,10 @@
+/**
+ * @file 6_move_member.cpp
+ * @brief 移动语义, 移动成员, 移动构造函数, 移动赋值运算符
+ * @author Albert
+ * @version 1.0.0
+ * @date 2024-11-21
+ */
 #include <iostream>
 #include <vector>
 using namespace std;

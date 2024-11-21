@@ -1,3 +1,10 @@
+/**
+ * @file 3_left_right_move.cpp
+ * @brief 移动语义, 左值和右值
+ * @author Albert
+ * @version 1.0.0
+ * @date 2024-11-21
+ */
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -69,7 +76,10 @@ struct Widget
         return *this;
     }
 
-    void process() { cout << value << ": [" << data->x << "," << data->y << "]" << endl; }
+    void process()
+    {
+        cout << value << ": [" << data->x << "," << data->y << "]" << endl;
+    }
 };
 
 Widget createWidget()

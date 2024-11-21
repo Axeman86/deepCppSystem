@@ -1,3 +1,10 @@
+/**
+ * @file 7_move_base.cpp
+ * @brief 移动语义：组合模式时的 copy and swap
+ * @author Albert
+ * @version 1.0.0
+ * @date 2024-11-21
+ */
 #include <iostream>
 #include <vector>
 using namespace std;
