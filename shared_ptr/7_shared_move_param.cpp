@@ -34,6 +34,7 @@ public:
     }
 };
 
+// 推荐，常用
 void process1(shared_ptr<Widget> w) // 传值，成为共享所有权之一
 {
     cout << "inside process1 " << w.use_count() << endl;
@@ -41,21 +42,24 @@ void process1(shared_ptr<Widget> w) // 传值，成为共享所有权之一
     cout << "inside process1 " << w.use_count() << ", data = " << upw->m_data++ << endl;
 }
 
-void process2(shared_ptr<Widget> & w) //传引用，不会改变引用计数
+// 可行，不常用
+void process2(shared_ptr<Widget> & w) // 传引用，不会改变引用计数
 {
     cout << "inside process2 " << w.use_count() << endl;
     shared_ptr<Widget> upw = w;
     cout << "inside process2 " << upw.use_count() << ", data = " << upw->m_data++ << endl;
 }
 
-void process3(const shared_ptr<Widget> & w) //传const引用，不会改变引用计数
+// 可行，不常用
+void process3(const shared_ptr<Widget> & w) // 传const引用，不会改变引用计数
 {
     cout << "inside process3 " << w.use_count() << endl;
     shared_ptr<Widget> upw = w;
     cout << "inside process3 " << upw.use_count() << ", data = " << upw->m_data++ << endl;
 }
 
-void process4(shared_ptr<Widget> && w) //右值传引用，不会改变引用计数
+// 可行，不常用
+void process4(shared_ptr<Widget> && w) // 右值传引用，不会改变引用计数
 {
     cout << "inside process4 " << w.use_count() << endl;
     shared_ptr<Widget> upw = w;
