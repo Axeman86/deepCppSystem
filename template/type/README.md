@@ -6,7 +6,7 @@
 
 - 将两个对象组合成一个对象，两个对象可以是同一类型或不同类型
 - C++17 之前，支持模版函数自动推导: `auto kv = std::make_pair(100, "Cpp"s);`
-- C++17 之后，支持构造函数参数类型推导: `std::pair kv{100, "Cpp"s}`
+- C++17 及之后，支持构造函数参数类型推导: `std::pair kv{100, "Cpp"s}`
 - std::pair 支持拷贝、移动、析构，是对 first and second 的委托调用
 
 ## std::tuple 类型

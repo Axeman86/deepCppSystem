@@ -12,7 +12,7 @@ using namespace std;
 
 // 总结：通过这种方式，Base 类可以调用派生类的实现，而不需要使用虚函数，从而实现了静态多态性
 // 1. Base 类是一个模板类，它接受一个派生类 Derived 作为模板参数。
-template <typename Derived>
+template <typename T>
 class Base
 {
 public:
@@ -20,7 +20,7 @@ public:
     void interface()
     {
         // 调用派生类的实现
-        static_cast<Derived *>(this)->implementation();
+        static_cast<T *>(this)->implementation();
     }
 
     // 基类提供的默认实现
