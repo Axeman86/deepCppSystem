@@ -1,6 +1,6 @@
 /**
  * @file 1_pair.cpp
- * @brief std::pair 是一个模板类，用于存储一对值，它是一个简单的数据结构，包含两个公有成员变量 first 和 second。
+ * @brief std::pair 是一个模板类，用于存储一对任何类型的值，它是一个简单的数据结构，包含两个公有成员变量 first 和 second。
  *        std::pair 支持拷贝、移动、析构，实际是对成员 first and second 的委托调用
  *            拷贝构造和拷贝赋值：当你拷贝一个 std::pair 对象时，会调用 first 和 second 成员的拷贝构造函数或拷贝赋值运算符。
  *            移动构造和移动赋值：当你移动一个 std::pair 对象时，会调用 first 和 second 成员的移动构造函数或移动赋值运算符。

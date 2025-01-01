@@ -1,6 +1,7 @@
 /**
  * @file 4_variant.cpp
- * @brief variant<T> 机制的测试用例，对比 union 的使用方式和相应的RAII机制是否触发
+ * @brief variant<T> 使用模版参数，来存储多个强类型参数中的一个，
+ *        测试验证对比 union 类型的使用方式和相应的RAII机制是否触发
  *        基本类型使用 union; 自定义类型使用 std::variant;
  * @author Albert
  * @version 1.0.0
@@ -108,7 +109,7 @@ int main()
         WidgetA a;
         w3.a = a;
 
-        // 不会主动的去trigger destructor
+        // 不会主动的去trigger destructor, 只会在作用域结束时触发自己的析构函数 ~WidgetABCU()
         // w3.a.~WidgetA();
     }
 

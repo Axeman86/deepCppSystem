@@ -1,6 +1,8 @@
 /**
  * @file 5_any.cpp
- * @brief std::any 类型的测试用例，测试 std::any 的基本功能和内存分配情况
+ * @brief std::any 可以存储任何支持拷贝构造函数的类型，包括自定义类型
+ *        std::any 使用的是小对象优化的内存模型，小对象存储在栈上，大对象存储在堆上，并使用RAII机制管理内存
+ *        注意：尽量避免使用std::any, 特别是存储基本类型，因为会有额外的内存分配和释放，有缓存折损
  * @author Albert
  * @version 1.0.0
  * @date 2024-12-30
@@ -66,15 +68,26 @@ struct Widget
 
 int main()
 {
-
     cout << "总分配：" << allocated << " bytes, 分配次数：" << alloc_times << " 释放次数：" << dealloc_times << endl;
 
     {
         Widget w;
 
         std::any any1 = 100;
+        try
+        {
+            // 使用 std::any_cast 将 std::any 转换为具体的类型
+            auto i = any_cast<double>(any1);
+            cout << "value is " << i << endl;
+        } catch (const std::bad_any_cast & e)
+        {
+            cout << e.what() << endl;
+        }
+        cout << "总分配：" << allocated << " bytes, 分配次数：" << alloc_times << " 释放次数：" << dealloc_times << endl;
         std::any any2 = "hello"s;
+        cout << "总分配：" << allocated << " bytes, 分配次数：" << alloc_times << " 释放次数：" << dealloc_times << endl;
         std::any any3 = w;
+        cout << "总分配：" << allocated << " bytes, 分配次数：" << alloc_times << " 释放次数：" << dealloc_times << endl;
 
         cout << sizeof(std::any) << endl;
         cout << sizeof(any1) << endl;

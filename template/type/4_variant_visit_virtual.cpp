@@ -1,6 +1,7 @@
 /**
  * @file 4_variant_visit_virtual.cpp
  * @brief variant<T> 机制配合 std::visit 实现多态访问的测试用例
+ *        当你调用 std::visit 时，编译器会根据传递给 std::visit 的 std::variant 的当前类型来推导模板参数的类型
  * @author Albert
  * @version 1.0.0
  * @date 2024-12-30
@@ -82,6 +83,7 @@ public:
 class ShapeVisitor
 {
 public:
+#ifdef NOT_USE_TEMPLATE
     void operator()(const Circle & c)
     {
         cout << "Circle visitor" << endl;
@@ -97,6 +99,15 @@ public:
         cout << "Triangle visitor" << endl;
         t.draw();
     }
+#else
+    // 类型推导：假设 shape 当前存储的是一个 Circle 对象，那么 std::visit 会调用 ShapeVisitor 的 operator()，并将 Circle
+    // 对象传递给它。编译器会自动推导出模板参数 T 的类型为 Circle, 等价于 void operator()(const Circle & c)
+    template <typename T>
+    void operator()(const T & t)
+    {
+        t.draw();
+    }
+#endif
     virtual ~ShapeVisitor() = default;
 };
 
@@ -108,6 +119,7 @@ int main(int argc, char ** argv)
     cout << "-------if object v is not null, destroy before store object" << endl;
     v = Circle();
     cout << "====================" << endl;
+    // 当你调用 std::visit 时，编译器会根据传递给 std::visit 的 std::variant 的当前类型来推导模板参数的类型
     std::visit(ShapeVisitor(), v);
 
     cout << "-------if object v is not null, destroy before store object" << endl;
