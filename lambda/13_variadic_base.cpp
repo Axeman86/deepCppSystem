@@ -59,7 +59,7 @@ int main()
     WidgetB b{ 2.2, 3.3 };
     WidgetC c{ 4.4, 5.5, 6.6 };
 
-    Object obj{ a, b, c };
+    Object obj{ a, b, c }; // <===>
     /* Object<WidgetA, WidgetB, WidgetC> obj{ a, b, c }; */
 
     cout << sizeof(obj) << endl;
