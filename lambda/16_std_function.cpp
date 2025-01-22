@@ -1,3 +1,12 @@
+/**
+ * @file 16_std_function.cpp
+ * @brief std::function 是一个类模板，它是一个通用、多态的函数封装器, 即: 函数包装器
+ *        std::function 可以用来包装任何可以调用的目标 —— 函数Object、lambda 表达式、函数指针、成员函数指针
+ *        std::function 使用了小对象优化技术(SOO), 即：小对象存储在栈，大对象存储在堆
+ * @author Albert
+ * @version 1.0
+ * @date 2025-01-21
+ */
 #include <functional>
 #include <iostream>
 #include <memory>
@@ -68,8 +77,8 @@ int main()
         function<void(int, string)> p2 = print;
         cout << boolalpha << (&p1 == &p2) << endl;
     }
-    cout << "----" << endl;
 
+    cout << "----" << endl;
     {
         PlusInts plus(10, 20);
         std::function<int(int, int)> g = plus;
@@ -77,23 +86,18 @@ int main()
         /* function object size is 32 bytes */
         cout << "function object g size is " << sizeof(g) << " bytes" << endl;
     }
-    cout << "----" << endl;
 
+    cout << "----" << endl;
     {
         Widget w;
-        /* lambda expret memory layout
-         * struct lambdaWiget
+        /* lambda expret memory layout, 值捕获 Widget 对象
+         * struct LambdaWiget
          * {
-         *     int operator()(int d1, int d2) { return x1 + d1 + d2; }
+         *     LambdaWiget(Widget w) : w_(w) {}
+         *     int operator()(int d1, int d2) const { return w_.x1 + d1 + d2; }
          *
-         *     int x1 = 1;
-         *     int x2;
-         *     int x3;
-         *     int x4;
-         *     int x5;
-         *     int x6;
-         *     int x7;
-         *     int x8;
+         * private:
+         *     Widget w_;
          * };
          */
         auto lambda = [=](int d1, int d2) -> int { return w.x1 + d1 + d2; };
@@ -106,9 +110,5 @@ int main()
 
         std::function<int(int, int)> k;
         cout << "function object k size is " << sizeof(k) << "bytes" << endl;
-
-        vector<std::function<int(int, int)>> vfunc;
-
-        /// vector<decltype(lambda)> vlam;
     }
 }

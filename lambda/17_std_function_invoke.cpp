@@ -1,3 +1,11 @@
+/**
+ * @file 17_std_function_invoke.cpp
+ * @brief std::function VS std::invoke use; std::invoke 提供了一个统一的调用语法，可以调用任何可调用对象:
+ *        包括函数对象、函数指针、成员函数、成员函数指针、lambda表达式、std::function 等
+ * @author Albert
+ * @version 1.0
+ * @date 2025-01-21
+ */
 #include <functional>
 #include <iostream>
 #include <utility>
@@ -38,7 +46,7 @@ int main()
 {
     MyClass mc{ 100 };
 
-    cout << "invoke---------" << endl;
+    cout << "std::invoke---------" << endl;
     {
         std::invoke(process, 10);
         std::invoke(Processor{}, 20);
@@ -51,37 +59,36 @@ int main()
         std::invoke([](int data) { cout << "lambda:" << data << endl; }, 50);
     }
 
-    cout << "function---------" << endl;
+    cout << "std::function---------" << endl;
     {
         std::function func1 = process;
-        std::function func2 = Processor{};
-        // func3_1 is callable, but can not be member variable
-        std::function<void(MyClass, int)> func3_1   = &MyClass::process;
-        std::function<void(MyClass &, int)> func3_2 = &MyClass::process;
-        std::function<void(MyClass *, int)> func3_3 = &MyClass::process;
-        std::function func4                         = &MyClass::sprocess;
-        std::function func5                         = [](int data) { cout << "lambda:" << data << endl; };
-
-        // mc.process(10); // process(&mc, 10);
-
         func1(100);
+
+        std::function func2 = Processor{};
         func2(200);
         cout << mc.value << endl;
 
+        // func3_1 is callable, but can not be member variable
+        std::function<void(MyClass, int)> func3_1 = &MyClass::process;
         func3_1(mc, 300);
         cout << mc.value << endl;
 
+        std::function<void(MyClass &, int)> func3_2 = &MyClass::process;
         func3_2(mc, 300);
         cout << mc.value << endl;
 
+        std::function<void(MyClass *, int)> func3_3 = &MyClass::process;
         func3_3(&mc, 300);
         cout << mc.value << endl;
 
+        std::function func4 = &MyClass::sprocess;
         func4(400);
         cout << mc.value << endl;
 
+        std::function func5 = [](int data) { cout << "lambda:" << data << endl; };
         func5(500);
-
         std::invoke(func5, 500);
+
+        // mc.process(10); // process(&mc, 10);
     }
 }
