@@ -1,3 +1,11 @@
+/**
+ * @file 19_ref_functor.cpp
+ * @brief std::reference_wrapper 是一个标准库模板类，用于包装引用，使其可以像对象一样进行拷贝、赋值操作
+ *        std::ref 和 std::cref 是 std::reference_wrapper 的工厂函数, create a reference_wrapper object from a reference
+ * @author Albert
+ * @version 1.0
+ * @date 2025-01-23
+ */
 #include <functional>
 #include <iostream>
 #include <string>
@@ -36,10 +44,12 @@ int main()
     binder1();
     w1.print();
 
+    // 创建一个 std::reference_wrapper 对象，包装 w2 的引用
     auto binder2 = bind(&update, std::ref(w2));
     binder2();
     w2.print();
 
+    // lambda reference capture Widget object
     auto lambda = [&](Widget & w) { w.no += 1; };
     cout << "lambda:" << sizeof(lambda) << endl;
     lambda(w1);

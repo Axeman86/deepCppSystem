@@ -1,6 +1,6 @@
 /**
  * @file 18_invoke_internal.cpp
- * @brief std::invoke 的内部实现原理, 自定义 myInvoke 函数，实现 std::invoke 的功能
+ * @brief std::invoke 的内部实现原理, 自定义 Invoke 函数，实现 std::invoke 的功能
  * @author Albert
  * @version 1.0
  * @date 2025-01-22
@@ -15,7 +15,8 @@ using namespace std;
 class MyClass
 {
 public:
-    // std::invoke 无法正确解析重载的成员函数。你可以通过显式地指定成员函数指针来解决这个问题
+    // std::invoke 无法正确解析重载的成员函数。only 通过显式地指定成员函数指针来解决这个问题
+    // 注意:函数重载只能是发生在同一个作用域中，即同一个类中
     void print(int data) { cout << "MyClass print: " << data << endl; }
     void print(const std::string & prefix, int data) { cout << prefix << data << endl; }
 

@@ -1,8 +1,9 @@
 /**
  * @file 16_std_function.cpp
- * @brief std::function 是一个类模板，它是一个通用、多态的函数封装器, 即: 函数包装器
- *        std::function 可以用来包装任何可以调用的目标 —— 函数Object、lambda 表达式、函数指针、成员函数指针
- *        std::function 使用了小对象优化技术(SOO), 即：小对象存储在栈，大对象存储在堆
+ * @brief std::function 是一个类模板，它是一个通用、多态的函数封装器
+ *     std::function 函数包装器, 提供了一个通用的函数封装器, 可以用来包装任何可以调用的目标:
+ *     (函数对象、lambda 表达式、函数指针、成员函数指针)
+ *     std::function 使用了小对象优化技术(SOO), 即：小对象存储在栈，大对象存储在堆
  * @author Albert
  * @version 1.0
  * @date 2025-01-21
