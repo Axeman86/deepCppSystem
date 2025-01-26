@@ -1,6 +1,7 @@
 /**
  * @file 17_std_function_invoke.cpp
- * @brief std::function VS std::invoke use; std::invoke 提供了一个统一的调用语法，可以调用任何可调用对象:
+ * @brief std::function VS std::invoke use;
+ *    std::invoke 提供了一个统一的调用语法，可以调用任何可调用对象:
  *        包括函数对象、函数指针、成员函数、成员函数指针、lambda表达式、std::function 等
  * @author Albert
  * @version 1.0

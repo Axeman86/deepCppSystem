@@ -1,8 +1,16 @@
 /**
  * @file 21_ref_wrapper.cpp
  * @brief std::reference_wrapper 是一个标准库模板类，用于包装引用，使其可以像对象一样进行拷贝、赋值操作
- *        它提供了一种将引用存储在容器（如 std::vector）中的方法，因为标准容器通常存储的是对象的副本，而不是引用。
- *        对比 Value semantics VS Reference semantics VS Shared semantics 三者的区别
+ *    它提供了一种将引用存储在容器（如 std::vector）中的方法，因为标准容器通常存储的是对象的副本，而不是引用。
+ *    对比 Value semantics VS Reference semantics VS Shared semantics 三者的区别
+ *  std::reference_wrapper
+      用途: 用于存储对象的引用。
+      优势: 轻量级，不管理对象的生命周期。 可以用于标准库容器（如 std::vector）中存储引用。
+      缺点: 不管理对象的生命周期，必须确保引用的对象在 reference_wrapper 的生命周期内有效。
+    std::shared_ptr
+      用途: 用于共享对象的所有权。
+      优势: 管理对象的生命周期，自动删除不再使用的对象。 可以多个 shared_ptr 实例共享同一个对象。
+      缺点: 相对较重，有额外的内存和性能开销（引用计数）。
  * @author Albert
  * @version 1.0
  * @date 2025-01-23

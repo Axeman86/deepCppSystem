@@ -1,6 +1,6 @@
 /**
  * @file 13_variadic_base.cpp
- * @brief 通过模版推导的方式，来实现对对个基类的继承和初始化
+ * @brief 通过模版推导的方式，来实现对单个基类的继承和初始化
  * @author Albert
  * @version 1.0
  * @date 2025-01-06
