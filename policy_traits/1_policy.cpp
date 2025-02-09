@@ -12,7 +12,7 @@
 #include <vector>
 using namespace std;
 
-template <class InputIterator, class Function>
+template <typename InputIterator, typename Function>
 inline void foreach (InputIterator first, InputIterator last, Function f)
 {
     for (; first != last; ++first)
