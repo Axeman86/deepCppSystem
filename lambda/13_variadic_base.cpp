@@ -48,10 +48,11 @@ struct Object : public Base...
 // struct Object: T1, T2, T3{
 // };
 
+// 模板推导的get，编译器在看到 Object(T...)时，必须要知道我实际是想使用 Object<T...> 这个类型,
+// 表示将类型参数包 T 展开，并用于构造 Object 类的实例;
+// 例如:使用 Object obj{a, b, c}，编译器会推导出 Object<WidgetA, WidgetB, WidgetC> obj{a, b, c};
 template <typename... T>
-Object(T...) -> Object<T...>; // 模板推导的get，编译器在看到 Object(T...)时，必须要知道我实际是想使用 Object<T...> 这个类型的,
-                              // 表示将类型参数包T展开，并用于构造Object类的实例;
-                              // 例如使用 Object obj{a, b, c}，编译器会推导出 Object<WidgetA, WidgetB, WidgetC> obj{a, b, c};
+Object(T...) -> Object<T...>;
 
 int main()
 {
@@ -59,15 +60,23 @@ int main()
     WidgetB b{ 2.2, 3.3 };
     WidgetC c{ 4.4, 5.5, 6.6 };
 
-    Object obj{ a, b, c }; // <===>
-    /* Object<WidgetA, WidgetB, WidgetC> obj{ a, b, c }; */
+    {
+        Object obj{ a, b, c }; // <===>
+        /* Object<WidgetA, WidgetB, WidgetC> obj{ a, b, c }; */
 
-    cout << sizeof(obj) << endl;
-    cout << obj.x << endl;
-    cout << obj.y << endl;
-    cout << obj.z << endl;
-    cout << obj.u << endl;
-    cout << obj.v << endl;
-    cout << obj.w << endl;
-    cout << obj.mx << endl;
+        cout << sizeof(obj) << endl;
+        cout << obj.x << endl;
+        cout << obj.y << endl;
+        cout << obj.z << endl;
+        cout << obj.u << endl;
+        cout << obj.v << endl;
+        cout << obj.w << endl;
+        cout << obj.mx << endl;
+    }
+
+    {
+        // 或者提前定义一个类型别名，这样就不需要 Object obj{a, b, c} 这种写法了
+        using WidgetABC = Object<WidgetA, WidgetB, WidgetC>;
+        WidgetABC obj{ a, b, c };
+    }
 }
