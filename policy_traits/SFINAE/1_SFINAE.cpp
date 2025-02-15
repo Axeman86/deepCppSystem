@@ -30,7 +30,7 @@ int process(...)
 template <typename T>
 typename T::MyType process(const T & t) // SFINAE away for int     int::MyType
 {
-    int data = 100;
+    typename T::MyType data = 100;
     cout << "const T& " << endl;
 
     return data;
