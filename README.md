@@ -28,6 +28,22 @@
 
 - [shared_ptr](./shared_ptr/README.md)
 
+### memory
+
+- [memory](./memory/README.md)
+
 ### template
 
 - [template](./template/README.md)
+
+### lambda
+
+- [lambda](./lambda/README.md)
+
+### traits and policy and SFINAE
+
+- [policy traits](./policy_traits/README.md)
+
+### compile runtime
+
+- [compile runtime](./compile/README.md)
