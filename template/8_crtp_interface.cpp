@@ -1,5 +1,5 @@
 /**
- * @file 7_crtp_interface_0.cpp
+ * @file 8_crtp_interface.cpp
  * @brief CRTP模式深入: Curiously Recurring Template Pattern, 奇异递归模板模式, Non-virtual interface(NVI)模式
  *        通过模板参数T包含了子类编译时信息，实现了编译时多态, 通过基类指针转型为子类T的指针
  *        它允许一个类将自己作为模板参数传递给基类，从而实现静态多态性和编译时多态性
@@ -92,37 +92,38 @@ void invoke(Base<T> * pb)
 int main()
 {
     {
-        Base<Sub1> * ps1 = new Sub1();
+        Sub1 * ps1 = new Sub1();
         ps1->process(); // process(ps1)
 
         invoke(ps1);
         cout << "data = " << ps1->sub()->data << endl;
         cout << ps1->sub()->p << " shared_ptr<int> p value = " << *(ps1->sub()->p) << endl;
 
-        // delete ps1;
-        // delete ps1->sub();
+        // delete ps1; // ERROR: 会调用~Base()，然后调用~Sub1()，然后调用~Base()，然后调用~Sub1()，进入死循环
+        // delete ps1->sub(); // ERROR: 会调用~Base()，然后调用~Sub1()，然后调用~Base()，然后调用~Sub1()，进入死循环
         ps1->destroy();
-        cout << "----------------" << endl;
     }
 
     {
-        Base<Sub2> * ps2 = new Sub2();
+        cout << "----------------" << endl;
+        Sub2 * ps2 = new Sub2();
         ps2->process();
         invoke(ps2);
         ps2->destroy();
-        cout << "----------------" << endl;
     }
 
     {
-        Base<Sub3> * ps3 = new Sub3();
+        cout << "----------------" << endl;
+        Sub3 * ps3 = new Sub3();
         ps3->process();
         invoke(ps3);
         ps3->destroy();
-        cout << "----------------" << endl;
     }
 
     {
-        // Base<Sub2> obj;  // ERROR
+        cout << "----------------" << endl;
+        // Base<Sub2> obj; // ERROR: Sub2()构造函数不能被调用
+        Sub2 obj;
     }
 
     {
@@ -132,7 +133,7 @@ int main()
         cout << "sizeof(Base<Sub1>) : " << sizeof(Base<Sub1>) << endl;
         cout << "sizeof(Sub1) : " << sizeof(Sub1) << endl;
 
-        // Sub1() constructor 不被调用，只调用了Base() construcotr，因为Base<Sub1>的构造函数没有调用Sub1的构造函数
+        // WARNING: Sub1() constructor 不被调用，只调用了Base() construcotr，因为Base<Sub1>的构造函数没有调用Sub1的构造函数
         Base<Sub1> * psx = new Base<Sub1>();
         psx->process();
         invoke(psx);
