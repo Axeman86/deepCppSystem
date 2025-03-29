@@ -18,6 +18,14 @@ using namespace std;
 template <typename T>
 class Base
 {
+protected:
+    ~Base()
+    {
+        // 子类析构函数会调用自己的父类析构函数，所以这里不需要delete，不然会重复delete进入死循环
+        // delete sub(); // static_cast<T*>(this);
+        cout << "~Base()" << endl;
+    }
+
 public:
     Base() { cout << "Base()" << endl; }
 
@@ -31,13 +39,6 @@ public:
     // 将基类指针转型为子类T的指针
     // ==> shared_from_this() return shared_ptr<T>
     T * sub() { return static_cast<T *>(this); } //  Base<T>* ---> T* converted Base<Sub1>* ---> Sub1*
-
-    ~Base()
-    {
-        // 子类析构函数会调用自己的父类析构函数，所以这里不需要delete，不然会重复delete进入死循环
-        // delete sub(); // static_cast<T*>(this);
-        cout << "~Base()" << endl;
-    }
 
     void destroy()
     {
@@ -90,30 +91,39 @@ void invoke(Base<T> * pb)
 
 int main()
 {
-    Base<Sub1> * ps1 = new Sub1();
-    ps1->process(); // process(ps1)
+    {
+        Base<Sub1> * ps1 = new Sub1();
+        ps1->process(); // process(ps1)
 
-    invoke(ps1);
-    cout << "data = " << ps1->sub()->data << endl;
-    cout << ps1->sub()->p << " shared_ptr<int> p value = " << *(ps1->sub()->p) << endl;
+        invoke(ps1);
+        cout << "data = " << ps1->sub()->data << endl;
+        cout << ps1->sub()->p << " shared_ptr<int> p value = " << *(ps1->sub()->p) << endl;
 
-    // delete ps1;
-    // delete ps1->sub();
-    ps1->destroy();
+        // delete ps1;
+        // delete ps1->sub();
+        ps1->destroy();
+        cout << "----------------" << endl;
+    }
 
-    cout << "----------------" << endl;
+    {
+        Base<Sub2> * ps2 = new Sub2();
+        ps2->process();
+        invoke(ps2);
+        ps2->destroy();
+        cout << "----------------" << endl;
+    }
 
-    Base<Sub2> * ps2 = new Sub2();
-    ps2->process();
-    invoke(ps2);
-    ps2->destroy();
-    cout << "----------------" << endl;
+    {
+        Base<Sub3> * ps3 = new Sub3();
+        ps3->process();
+        invoke(ps3);
+        ps3->destroy();
+        cout << "----------------" << endl;
+    }
 
-    Base<Sub3> * ps3 = new Sub3();
-    ps3->process();
-    invoke(ps3);
-    ps3->destroy();
-    cout << "----------------" << endl;
+    {
+        // Base<Sub2> obj;  // ERROR
+    }
 
     {
         cout << "----Test object memory truncation----" << endl;
