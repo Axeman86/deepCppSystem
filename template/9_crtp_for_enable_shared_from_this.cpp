@@ -42,10 +42,7 @@ public:
 #endif
     }
 
-    std::shared_ptr<const T> shared_from_this() const
-    {
-        return static_cast<std::shared_ptr<T>>(this->weak_this);
-    }
+    std::shared_ptr<const T> shared_from_this() const { return static_cast<std::shared_ptr<T>>(this->weak_this); }
 };
 
 // 扩展接口： 父类里面注入子类信息
