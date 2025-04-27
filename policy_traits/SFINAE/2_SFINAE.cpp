@@ -26,7 +26,7 @@ int process(...)
     return data;
 }
 
-// secode template parameter is a pointer type, if T has MyType member type, call this function
+// secend template parameter is a pointer type, if T has MyType member type, call this function
 template <typename T>
 int process(const T & t, typename T::MyType * p = nullptr) // SFINAE way for int, int::MyType
 {
