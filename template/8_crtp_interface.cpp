@@ -133,7 +133,7 @@ int main()
         cout << "sizeof(Base<Sub1>) : " << sizeof(Base<Sub1>) << endl;
         cout << "sizeof(Sub1) : " << sizeof(Sub1) << endl;
 
-        // WARNING: Sub1() constructor 不被调用，只调用了Base() construcotr，因为Base<Sub1>的构造函数没有调用Sub1的构造函数
+        // WARNING:Sub1() constructor 不被调用，只调用了Base() construcotr，因为Base<Sub1>的构造函数没有调用Sub1的构造函数
         Base<Sub1> * psx = new Base<Sub1>();
         psx->process();
         invoke(psx);

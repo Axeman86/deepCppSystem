@@ -3,7 +3,7 @@
  * @brief function pointer Vs functor object Vs lambda expression
  *        1. function pointer: void (*)(int)
  *        2. functor object: struct IntPrinter{ void operator()(int data) const { } };
- *        3. lambda expression: [](auto data) { }
+ *        3. lambda expression: [](auto data) { }; lambda expression is a function object
  *        函数对象是通过重载类的 operator() 调用操作符，实现类似函数的功能，将类对象当作函数使用的能力
  * @author Albert
  * @version 1.0
@@ -23,17 +23,20 @@ void foreach (Container c, F op)
     }
 }
 
+// function pointer
 using FPointer = void (*)(int);
 void print(int data)
 {
     cout << data << " ";
 }
 
+// function object
 struct IntPrinter
 {
     void operator()(int data) const { cout << data << ","; }
 };
 
+// function template object
 template <typename T>
 struct Printer
 {
@@ -72,49 +75,52 @@ int main()
 {
     vector v = { 7, 2, 8, 4, 3 };
 
-    FPointer p = print;
-    p(100);
-    foreach (v, p)
-        ; //函数指针
-    cout << endl;
+    {
+        FPointer p = print;
+        p(100);
+        foreach (v, p)
+            ; // 函数指针
+        cout << endl;
+    }
 
-    IntPrinter intPter;
-    intPter(100);
+    {
+        IntPrinter intPter;
+        intPter(100);
+        foreach (v, intPter)
+            ;
+        cout << endl;
+    }
 
-    Printer<int> pobj;
-    pobj(100);
+    {
+        Printer<int> pobj;
+        pobj(100);
 
-    foreach (v, pobj)
-        ; //函数对象 inline
-    foreach (v, Printer<int>{})
-        ;
-    cout << endl;
+        foreach (v, pobj)
+            ; // 函数对象 inline
+        foreach (v, Printer<int>{})
+            ;
+        cout << endl;
+    }
 
-    // Labmda表达式
-    foreach (v, [](auto data) { cout << data << ","; })
-        ;
-    cout << endl;
+    {
+        // foreach(v, ___LambdaXXXX{});
+        foreach (v, [](auto data) { cout << data << ","; })
+            ;
+        cout << endl;
+    }
 
-    // foreach(v, ___LambdaXXXX{});
+    {
+        // 函数指针
+        sort(v.begin(), v.end(), compare<int>);
+        // 函数对象
+        sort(v.begin(), v.end(), Comparer<int>{});
+        sort(v.begin(), v.end(), std::greater<int>{});
 
-    // 函数指针
-    sort(v.begin(), v.end(), compare<int>);
-    // 函数对象
-    sort(v.begin(), v.end(), Comparer<int>{});
-    sort(v.begin(), v.end(), std::greater<int>{});
+        // Labmda表达式
+        sort(v.begin(), v.end(), [](auto x, auto y) -> bool { return x > y; });
 
-    // Labmda表达式
-    sort(v.begin(), v.end(), [](auto x, auto y) -> bool { return x > y; });
-
-    foreach (v, [](auto data) { cout << data << "-"; })
-        ;
-
-    // //foreach(v, ___LambdaXXXX{} );
-
-    // cout<<endl;
-
-    // foreach(v,[](auto data) {
-    //                 cout << data <<"-";
-    //             });
-    // cout<<endl;
+        foreach (v, [](auto data) { cout << data << "-"; })
+            ;
+        cout << endl;
+    }
 }

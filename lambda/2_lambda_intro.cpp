@@ -17,10 +17,11 @@ void print(vector<int> v)
     cout << endl;
 }
 
+// []() -> void { return true; } 无捕获，无参数，无返回值 Lambda 等价于对应的函数对象
 // struct Lambda{
-// 	bool operator()(int i) noexcept
+//  Lambda() = default;
+// 	void operator()() noexcept
 // 	{
-// 		return i > 10;
 // 	}
 // };
 
@@ -39,9 +40,11 @@ int main()
         cout << *i << " ";
     cout << endl;
 
+    // 排序从大到小
     sort(v.begin(), v.end(), [](const int & a, const int & b) -> bool { return a > b; });
     print(v);
 
+    // 查找大于等于7的元素，并返回 number
     int number = count_if(v.begin(), v.end(), [](int a) { return (a >= 7); });
     cout << number << endl;
 
