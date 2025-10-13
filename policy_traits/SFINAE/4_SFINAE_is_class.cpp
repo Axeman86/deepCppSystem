@@ -8,9 +8,8 @@
  * @date 2025-02-09
  */
 #include <iostream>
-#include <memory>
 #include <string>
-#include <vector>
+
 using namespace std;
 
 template <typename T>
@@ -31,7 +30,7 @@ private:
     static Tow test(...); // Ts不支持::运算符，较弱绑定类型
 public:
     // 因为 union 类型也支持::运算符，所以需要排除 union 类型
-    static constexpr bool Value = (sizeof(IsClassT<T>::test<T>(nullptr)) == 1) && !std::is_union<T>::value;
+    static constexpr bool Value = (sizeof(IsClassT<T>::test<T>(nullptr)) == 1) && !std::is_union_v<T>;
 };
 
 struct Point

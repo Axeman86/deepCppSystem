@@ -39,7 +39,7 @@ int process(const T & t, typename T::MyType * p = nullptr) // SFINAE way for int
 int main()
 {
     Widget w{ 100 };
-    process(w); // int process(const T& t, int::MyType* p=nullptr)
+    process(w); // int process(const Widget& t, int* p=nullptr)
 
     int data;
     process(data); // int process(...)
