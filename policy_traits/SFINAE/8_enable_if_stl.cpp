@@ -18,7 +18,7 @@ public:
     // 强类型绑定： If _OrigPtr * and const enable_shared_from_this<_Yp> * is convertible, then enable weak type
     // binding return type is void
     template <typename _Yp, typename _OrigPtr>
-    typename enable_if<is_convertible_v<_OrigPtr *, const enable_shared_from_this<_Yp> *>, void>::type
+    enable_if_t<is_convertible_v<_OrigPtr *, const enable_shared_from_this<_Yp> *>, void>
     __enable_weak_this(const enable_shared_from_this<_Yp> * __e, _OrigPtr * __ptr) noexcept
     {
         typedef typename remove_cv<_Yp>::type _RawYp;
@@ -35,6 +35,7 @@ public:
 
 int main()
 {
+    cout << "shared_ptr custom implement enable_if example" << endl;
     shared_ptr<int> p;
     custom::shared_ptr<int> cp;
 }

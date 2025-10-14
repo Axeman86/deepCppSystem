@@ -24,10 +24,10 @@ private:
 
     // 模板函数不要求函数必须完整实现, 只要函数签名正确即可
     template <typename Ts>
-    static One test(int Ts::*); // Ts支持::运算符，较强绑定类型; 传入的参数是一个指向类成员的指针，说明Ts是一个类类型
+    static One test(int Ts::*); // Ts支持"::"作用域解析运算符，较强绑定类型; 传入的参数是一个指向类成员的指针，说明Ts是一个类类型
 
     template <typename Ts>
-    static Tow test(...); // Ts不支持::运算符，较弱绑定类型
+    static Tow test(...); // Ts不支持"::"作用域解析运算符，较弱绑定类型
 public:
     // 因为 union 类型也支持::运算符，所以需要排除 union 类型
     static constexpr bool Value = (sizeof(IsClassT<T>::test<T>(nullptr)) == 1) && !std::is_union_v<T>;
