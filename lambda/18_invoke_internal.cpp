@@ -66,7 +66,7 @@ void Foreach(Iter current, Iter end, Callable op, Args const &... args)
     }
 }
 
-int main(void)
+int main()
 {
     MyClass mc;
 
@@ -76,6 +76,7 @@ int main(void)
         MyCustom::Invoke(print, 10);
         MyCustom::Invoke(Printer{}, 20);
         // ==> auto Invoke(_Fn && __f, _T1 * __t1, _A0 && __a0)
+        // MyClass::* 表示成员函数指针类型
         MyCustom::Invoke(static_cast<void (MyClass::*)(int)>(&MyClass::print), &mc, 30);
         // ==> auto Invoke(_Fn && __f, _T1 & __t1, _A0 && __a0)
         MyCustom::Invoke(static_cast<void (MyClass::*)(int)>(&MyClass::print), mc, 30);

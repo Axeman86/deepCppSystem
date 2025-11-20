@@ -52,7 +52,7 @@ void invoke(int data)
 {
     if (data < 0)
     {
-        invalid_argument exp("data");
+        invalid_argument exp("data"); // 创建参数错误异常对象
         throw exp;
     }
 }
@@ -63,8 +63,8 @@ void file_process()
     cout << "打开文件...." << endl;
 
     /* automatic type_info */
-    Scopeguard scopeguard([&]() {
-        FCLOSE(FP);
+    ScopeGuard scopeguard([&]() {
+        fclose(fp);
         cout << "确保关闭文件" << endl;
     });
 
@@ -72,9 +72,9 @@ void file_process()
 
     invoke(-100);
 
-    //关闭文件
-    //  fclose(fp);
-    //  cout<<"关闭文件"<<endl;
+    // 关闭文件
+    //   fclose(fp);
+    //   cout<<"关闭文件"<<endl;
 }
 
 void stack_process()
