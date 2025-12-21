@@ -20,7 +20,7 @@ private:
     std::string name;
 
 public:
-    template <typename T, typename U = EnableIfString<T>>
+    template <typename T, typename U = EnableIfString<T>> // U is void if T is convertible to std::string
     /* template <typename T, typename U = enable_if_t<is_convertible_v<T, std::string>>> */
     explicit Widget(T && n) : name(std::forward<T>(n))
     {
