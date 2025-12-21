@@ -3,14 +3,38 @@
  * @brief std::function VS std::invoke use;
  *    std::invoke 提供了一个统一的调用语法，可以调用任何可调用对象:
  *        包括函数对象、函数指针、成员函数、成员函数指针、lambda表达式、std::function 等
+ 1. **function**
+   - 定义和实现一段可复用的逻辑。
+   - 适用于需要多次调用、具名、可组合的操作。
+   - 例子：
+     ```cpp
+     int add(int a, int b) { return a + b; }
+     ```
+
+2. **invoke**
+   - 通常指“调用”某个可调用对象（函数、lambda、成员函数等）。
+   - 在 C++ 中，`std::invoke` 可以统一调用普通函数、成员函数指针、函数对象等。
+   - 适用于泛型编程、需要统一调用接口的场景。
+   - 例子：
+     ```cpp
+     std::invoke(add, 1, 2); // 调用函数
+     std::invoke(&MyClass::method, obj, arg); // 调用成员函数
+     ```
+
+**选择建议：**
+- 需要定义逻辑时用 `function`（或函数/方法）。
+- 需要“以统一方式调用各种可调用对象”时用 `invoke`，比如模板、回调、事件分发等场景。
+
+简言之：
+- `function` 负责“定义”；
+- `invoke` 负责“调用”，尤其在泛型和多态调用时更有用。
+
  * @author Albert
  * @version 1.0
  * @date 2025-01-21
  */
 #include <functional>
 #include <iostream>
-#include <utility>
-#include <vector>
 
 using namespace std;
 

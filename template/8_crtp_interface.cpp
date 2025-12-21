@@ -25,10 +25,9 @@ protected:
         // delete sub(); // static_cast<T*>(this);
         cout << "~Base()" << endl;
     }
-
-public:
     Base() { cout << "Base()" << endl; }
 
+public:
     void process()
     {
         sub()->process_imp(); // 编译时分发
@@ -83,6 +82,7 @@ public:
     void process_imp() { cout << "Sub3::process()" << endl; }
 };
 
+// 表示“让某个 功能/操作 被执行, 它比 call 更强调“触发某种机制”或“间接调用”
 template <typename T>
 void invoke(Base<T> * pb)
 {
@@ -134,13 +134,13 @@ int main()
         cout << "sizeof(Sub1) : " << sizeof(Sub1) << endl;
 
         // WARNING:Sub1() constructor 不被调用，只调用了Base() construcotr，因为Base<Sub1>的构造函数没有调用Sub1的构造函数
-        Base<Sub1> * psx = new Base<Sub1>();
-        psx->process();
-        invoke(psx);
+        // Base<Sub1> * psx = new Base<Sub1>();
+        // psx->process();
+        // invoke(psx);
         // 访问子类成员变量，会出现段错误; 因为Sub1()构造函数没有被调用，出现了内存被截断的情况，因为根本没有为子类分配内存
         /* cout << "data = " << ps2->sub()->data << endl; */
         /* cout << ps2->sub()->p << " shared_ptr<int> value = " << *(ps2->sub()->p) << endl; */
-        psx->destroy();
+        // psx->destroy();
 
         // Error: Base<int> * pi = new Sub1();
         /* Base<int> * pi = new Base<int>();

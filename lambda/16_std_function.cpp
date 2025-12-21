@@ -10,10 +10,7 @@
  */
 #include <functional>
 #include <iostream>
-#include <memory>
 #include <string>
-#include <utility>
-#include <vector>
 
 using namespace std;
 
@@ -76,6 +73,7 @@ int main()
         p1(200, "Design Patterns");
 
         function<void(int, string)> p2 = print;
+        // 这是二个 function 对象，虽然它们包装了同一个函数，所以它们的地址是不一样的
         cout << boolalpha << (&p1 == &p2) << endl;
     }
 
@@ -83,6 +81,7 @@ int main()
     {
         PlusInts plus(10, 20);
         std::function<int(int, int)> g = plus;
+        // sizeof(plus) == sizeof(PlusInts) == sizeof(int) * 2 bytes
         cout << "plus object size is " << sizeof(plus) << " bytes" << endl;
         /* function object size is 32 bytes */
         cout << "function object g size is " << sizeof(g) << " bytes" << endl;
