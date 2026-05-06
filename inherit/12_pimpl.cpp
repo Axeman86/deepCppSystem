@@ -58,7 +58,7 @@ public:
     virtual void doSomethingImpl() override { std::cout << "Doing something in the implimentation 1 class." << std::endl; }
 };
 
-class myClassImpl2 : public MyClassImpl1
+class myClassImpl2 : public MyClassBaseImpl
 {
 public:
     myClassImpl2()  = default;

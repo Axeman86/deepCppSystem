@@ -9,9 +9,6 @@ struct FooPimpl::Impl
 };
 
 FooPimpl::FooPimpl() : mImpl(std::make_unique<Impl>()) {}
-FooPimpl::~FooPimpl()                                = default;
-FooPimpl::FooPimpl(FooPimpl &&) noexcept             = default;
-FooPimpl & FooPimpl::operator=(FooPimpl &&) noexcept = default;
 
 void FooPimpl::push(const std::string & s)
 {
