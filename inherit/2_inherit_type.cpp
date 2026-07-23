@@ -22,31 +22,31 @@ public:
 };
 
 class Sub1 : public Base1
-{ //继承
+{ // 继承
 public:
     int data;
 
     void process() override {}
 
-    ~Sub1() { cout << "~Sub1()" << endl; }
+    ~Sub1() override { cout << "~Sub1()" << endl; }
 };
 
-void process1(Base1 b) //对象切片，不具多态性
+void process1(Base1 b) // 对象切片，不具多态性
 {
-    b.process(); //非多态调用--编译时绑定 JMP 0x0000040
+    b.process(); // 非多态调用--编译时绑定 JMP 0x0000040
 }
-void process2(Base1 * b) //保留多态性
+void process2(Base1 * b) // 保留多态性
 {
-    //双重身份
-    // 1. 编译时类型：Base1*
-    // 2. 运行时类型: 根据参数传递的实际类型决定(runtime)
-    b->process(); //多态调用 JMP (虚表指针)
+    // 双重身份
+    //  1. 编译时类型：Base1*
+    //  2. 运行时类型: 根据参数传递的实际类型决定(runtime)
+    b->process(); // 多态调用 JMP (虚表指针)
 }
 
-void process3(Base1 & b) //保留多态性
+void process3(Base1 & b) // 保留多态性
 {
-    //双重身份
-    b.process(); //多态调用
+    // 双重身份
+    b.process(); // 多态调用
 }
 
 int main()
@@ -56,8 +56,8 @@ int main()
 
     Base1 * ps1 = new Sub1();
 
-    process1(s1);   //对象切片
-    process1(*ps1); //对象切片
+    process1(s1);   // 对象切片
+    process1(*ps1); // 对象切片
 
     process2(ps1);
     process2(&b1);
@@ -67,7 +67,7 @@ int main()
     process3(b1);
     process3(*ps1);
 
-    Sub1 * ps2 = dynamic_cast<Sub1 *>(ps1); //多态转型
+    Sub1 * ps2 = dynamic_cast<Sub1 *>(ps1); // 多态转型
     // Sub1* ps2=(Sub1*)ps1; //不安全转型
 
     if (ps2 != nullptr)
