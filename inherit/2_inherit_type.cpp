@@ -87,11 +87,17 @@ int main()
     vector<Base1 *> v2;
 
     Sub1 * psarray =
-        new Sub1[10];          // 24byte, [vptr,x,y,data][vptr,x,y,data][vptr,x,y,data][vptr,x,y,data][vptr,x,y,data][x,y,data]...
+        new Sub1[10]; // 24byte, [vptr,x,y,data][vptr,x,y,data][vptr,x,y,data][vptr,x,y,data][vptr,x,y,data][x,y,data]...
+    for (int i = 0; i < 10; i++)
+    {
+        psarray[i].process(); // psarray[i] ==> psarray + sizeof(Sub1)*i
+    }
+
     Base1 * pbarray = psarray; // 16byte
     for (int i = 0; i < 10; i++)
     {
-        pbarray[i].process(); // pbarray[i] ==> pbarray+ sizeof(Base1)*i
+        // sigmentation fault
+        pbarray[i].process(); // pbarray[i] ==> pbarray + sizeof(Base1)*i
     }
 
     delete[] psarray;
