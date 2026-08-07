@@ -1,5 +1,6 @@
 // foo_cat.cpp
 #include "foo_cat.hpp"
+#include <iostream>
 #include <vector>
 
 struct FooCatImpl
@@ -15,4 +16,14 @@ void FooCat::push(const std::string & s)
 std::size_t FooCat::size() const
 {
     return impl()->mData.size();
+}
+
+int main()
+{
+    FooCat foo;
+
+    foo.push("Hello");
+    foo.push("World");
+
+    std::cout << "Size: " << foo.size() << std::endl;
 }
