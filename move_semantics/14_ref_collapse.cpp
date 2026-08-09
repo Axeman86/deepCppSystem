@@ -38,7 +38,7 @@ void invoke(T && obj)
 
     cout << "is_rvalue_reference<decltype(obj)>::value:" << is_rvalue_reference<decltype(obj)>::value << endl;
     cout << "is_rvalue_reference<T>::value:" << is_rvalue_reference<T>::value << endl;
-    cout << "is_lvalue_reference<T &&>::value: " << is_lvalue_reference<T &&>::value << endl;
+    cout << "is_rvalue_reference<T &&>::value: " << is_rvalue_reference<T &&>::value << endl;
     cout << "is_rvalue_reference<T &>::value:" << is_rvalue_reference<T &>::value << endl; // 永远左值
 }
 
@@ -59,17 +59,17 @@ int main()
         auto && w3 = w2; // Wdiget&& & -> Widget& , 指向左值引用的右值引用
         // auto& & w4=w; ERROR 没有引用的引用
 
-        cout << is_lvalue_reference<decltype(w)>::value << endl;
-        cout << is_lvalue_reference<decltype(w1)>::value << endl;
-        cout << is_lvalue_reference<decltype(w2)>::value << endl;
-        cout << is_lvalue_reference<decltype(w3)>::value << endl;
+        cout << is_lvalue_reference_v<decltype(w)> << endl;
+        cout << is_lvalue_reference_v<decltype(w1)> << endl;
+        cout << is_lvalue_reference_v<decltype(w2)> << endl;
+        cout << is_lvalue_reference_v<decltype(w3)> << endl;
 
         cout << endl;
 
-        cout << is_rvalue_reference<decltype(w)>::value << endl;
-        cout << is_rvalue_reference<decltype(w1)>::value << endl;
-        cout << is_rvalue_reference<decltype(w2)>::value << endl;
-        cout << is_rvalue_reference<decltype(w3)>::value << endl;
+        cout << is_rvalue_reference_v<decltype(w)> << endl;
+        cout << is_rvalue_reference_v<decltype(w1)> << endl;
+        cout << is_rvalue_reference_v<decltype(w2)> << endl;
+        cout << is_rvalue_reference_v<decltype(w3)> << endl;
     }
 
     cout << "-------" << endl;

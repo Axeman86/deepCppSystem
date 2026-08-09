@@ -6,7 +6,6 @@
  * @date 2024-10-26
  */
 #include <iostream>
-#include <vector>
 using namespace std;
 
 struct Widget
@@ -41,14 +40,14 @@ struct MyClass
     {
         //....
         //....
-        m_w = w; //左值 copy assignment
+        m_w = w; // 左值 copy assignment
     }
 
     void setValue(Widget && w)
     {
         //....
         //....
-        m_w = std::move(w); //右值 move assignment
+        m_w = std::move(w); // 右值 move assignment
     }
 #else
     /*
@@ -79,10 +78,7 @@ struct MyClass
     // 1. 如果传递左值，先copy constructor，后 move assignment
     // 2. 如果传递右值，copy ctor removed，直接move assignment
     // 所以如果使用右值引用来赋值，则可以省去拷贝构造的调用
-    void setValue(Widget w)
-    {
-        m_w = std::move(w);
-    }
+    void setValue(Widget w) { m_w = std::move(w); }
 #endif
 
     Widget m_w;

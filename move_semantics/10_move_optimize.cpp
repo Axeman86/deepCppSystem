@@ -53,7 +53,7 @@ public:
         {
             return *this;
         }
-        Widget temp(move(rhs));
+        Widget temp(std::move(rhs));
         swap(data, temp.data);
         swap(data_ptr, temp.data_ptr);
 
@@ -72,7 +72,7 @@ vector<Widget> getVec()
 
 array<Widget, 20> getArr()
 {
-    return array<Widget, 20> {};
+    return array<Widget, 20>{};
 }
 
 int main()

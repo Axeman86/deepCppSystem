@@ -6,7 +6,6 @@
  * @date 2024-11-17
  */
 #include <iostream>
-#include <vector>
 using namespace std;
 
 #define NO_MOVE
@@ -14,7 +13,7 @@ struct Point
 {
     int x;
     int y;
-    Point(int _x, int _y) : x(_x), y(_y) { }
+    Point(int _x, int _y) : x(_x), y(_y) {}
 };
 
 struct Widget
@@ -93,10 +92,7 @@ struct Widget
         delete data;
     }
 
-    void process()
-    {
-        cout << value << ": [" << data->x << "," << data->y << "]" << endl;
-    }
+    void process() { cout << value << ": [" << data->x << "," << data->y << "]" << endl; }
 };
 
 #define USE_RVO

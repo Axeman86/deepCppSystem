@@ -6,7 +6,6 @@
  * @date 2024-11-21
  */
 #include <iostream>
-#include <vector>
 using namespace std;
 
 class MyClass
@@ -66,7 +65,7 @@ public:
 
     Widget(Widget && rhs) noexcept :
         // 1. 窃取源对象的指针值
-        MyClass(std::move(rhs)), //调用父类move ctor
+        MyClass(std::move(rhs)), // 调用父类move ctor
         data(rhs.data), value(rhs.value)
     {
 
@@ -88,7 +87,7 @@ public:
         this->data = rhs.data; // 2. 窃取源对象的值
         rhs.data   = nullptr;  // 3. 将源对象的值设为有效状态
 #else
-        Widget tmp{ move(rhs) };
+        Widget tmp{ std::move(rhs) };
         swap(value, tmp.value);
         swap(data, tmp.data);
 #endif
