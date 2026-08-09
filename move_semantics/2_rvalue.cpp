@@ -5,8 +5,8 @@
  * @version 1.0.0
  * @date 2024-11-21
  */
+#include <functional>
 #include <iostream>
-#include <numeric>
 using namespace std;
 
 void process(int && data);

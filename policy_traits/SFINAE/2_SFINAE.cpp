@@ -27,8 +27,9 @@ int process(...)
 }
 
 // secend template parameter is a pointer type, if T has MyType member type, call this function
-template <typename T>
-int process(const T & t, typename T::MyType * p = nullptr) // SFINAE way for int, Widget::MyType is int
+template <typename T, typename T::MyType * = nullptr> // SFINAE way for int, Widget::MyType is int
+// int process(const T & t, typename T::MyType * = nullptr) // unknow name argment
+int process(const T & t)
 {
     typename T::MyType data = 100;
     cout << "const T& " << endl;

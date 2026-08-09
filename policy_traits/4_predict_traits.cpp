@@ -63,7 +63,7 @@ void invoke_std(T t)
     invokeImpl(t, std::is_pointer<T>{});
 }
 
-int main(void)
+int main()
 {
     cout << "--------------------------------" << endl;
     {

@@ -5,6 +5,7 @@
  * @version 1.0
  * @date 2025-02-09
  */
+#include <cstdint>
 #include <iostream>
 using namespace std;
 
@@ -61,14 +62,14 @@ class LabelColorLine: ColorLine{};
 class Label
 {
 public:
-    std::string label;
-    Label() : label("") {}
+    std::string label{};
+    Label() {}
 };
 
 class Color
 {
 public:
-    unsigned char red = 0, green = 0, blue = 0;
+    uint8_t red = 0, green = 0, blue = 0;
 };
 
 using LabelPoint      = Point<Label>;
@@ -82,10 +83,14 @@ using LabelColorLine = Line<Label, Color>;
 int main()
 {
     LabelColorPoint pt;
-    pt.x     = 100;
-    pt.y     = 200;
+    pt.x     = 100.1;
+    pt.y     = 200.1;
     pt.label = "2D";
     pt.blue  = 255;
     pt.red   = 255;
     pt.green = 255;
+    std::cout << pt.label << ":" << std::endl;
+    std::cout << "(x=" << pt.x << ", y=" << pt.y << ")" << std::endl;
+    // std::cout << "(red:" << std::hex << pt.red << ", green:" << pt.green << ", blue:" << pt.blue << ")" << endl;
+    printf("(red:%d, green:%d, blue:%d\n", pt.red, pt.green, pt.blue);
 }
