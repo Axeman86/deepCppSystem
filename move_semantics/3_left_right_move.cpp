@@ -6,7 +6,6 @@
  * @date 2024-11-21
  */
 #include <iostream>
-#include <vector>
 using namespace std;
 
 struct Point
@@ -76,10 +75,7 @@ struct Widget
         return *this;
     }
 
-    void process()
-    {
-        cout << value << ": [" << data->x << "," << data->y << "]" << endl;
-    }
+    void process() { cout << value << ": [" << data->x << "," << data->y << "]" << endl; }
 };
 
 Widget createWidget()
@@ -107,7 +103,7 @@ int main()
         Widget w2(2, 100, 200);
 
         cout << "-----" << w1.data << "," << w2.data << endl;
-        w2 = std::move(w1); //移动赋值 调用之后，w1不可用
+        w2 = std::move(w1); // 移动赋值 调用之后，w1不可用
         w2.process();
         // 如果使用内联对象，则不会有问题，因为只是进行了拷贝；
         // 使用了分离内存，所以会导致错误, 因为此分离内存的指针已经被移动;

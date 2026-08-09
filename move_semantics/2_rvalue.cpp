@@ -5,7 +5,6 @@
  * @version 1.0.0
  * @date 2024-11-21
  */
-#include <functional>
 #include <iostream>
 using namespace std;
 
@@ -60,6 +59,7 @@ int main()
 
     auto s1 = "hello";
     auto s2 = "hello"s;
+    cout << "s2 type:" << typeid(s2).name() << endl;
 
     // invoke(s1);
     // invoke(s2);

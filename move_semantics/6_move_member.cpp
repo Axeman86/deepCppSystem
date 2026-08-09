@@ -6,7 +6,6 @@
  * @date 2024-11-21
  */
 #include <iostream>
-#include <vector>
 using namespace std;
 
 class MyClass

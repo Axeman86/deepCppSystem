@@ -6,7 +6,6 @@
  * @date 2024-11-21
  */
 #include <iostream>
-#include <vector>
 using namespace std;
 
 struct Point
@@ -72,21 +71,21 @@ int main()
 {
     {
         Widget w{ 3, 1000, 2000 };
-        w = createWidget(); //移动赋值, Rvalue
+        w = createWidget(); // 移动赋值, Rvalue
     }
 
     cout << "------" << endl;
     {
         Widget w1{ 1, 10, 20 };
         Widget w2{ 2, 100, 200 };
-        w2 = std::move(w1); //移动赋值, Rvalue
+        w2 = std::move(w1); // 移动赋值, Rvalue
     }
 
     cout << "------" << endl;
     {
         Widget w1{ 1, 10, 20 };
         Widget w2{ 2, 100, 200 };
-        w2 = w1; //拷贝赋值, Lvalue
+        w2 = w1; // 拷贝赋值, Lvalue
     }
 
     cout << "------" << endl;

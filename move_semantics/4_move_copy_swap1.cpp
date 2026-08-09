@@ -6,7 +6,6 @@
  * @date 2024-11-21
  */
 #include <iostream>
-#include <vector>
 using namespace std;
 
 struct Point
@@ -76,7 +75,7 @@ struct Widget
             return *this;
         }
 
-        Widget temp(std::move(rhs)); //调用移动构造
+        Widget temp(std::move(rhs)); // 调用移动构造
         swap(value, temp.value);
         swap(data, temp.data);
 
@@ -98,42 +97,42 @@ int main()
 
     {
         Widget w{ 3, 1000, 2000 };
-        w = createWidget(); //移动赋值
+        w = createWidget(); // 移动赋值
     }
 
     cout << "------" << endl;
     {
         Widget w1{ 1, 10, 20 };
         Widget w2{ 2, 100, 200 };
-        w2 = std::move(w1); //移动赋值
+        w2 = std::move(w1); // 移动赋值
     }
 
     cout << "------" << endl;
     {
         Widget w1{ 1, 10, 20 };
         Widget w2{ 2, 100, 200 };
-        w2 = w1; //拷贝赋值
+        w2 = w1; // 拷贝赋值
     }
 
     cout << "------" << endl;
     {
         Widget w1{ 1, 10, 20 };
-        Widget w2 = std::move(w1); //移动构造
+        Widget w2 = std::move(w1); // 移动构造
     }
     cout << "------" << endl;
     {
-        Widget w1 = createWidget(); //本应移动构造、但编译器执行了拷贝消除
-    }
-
-    cout << "------" << endl;
-    {
-        Widget w1{ 1, 10, 20 };
-        w1 = w1; //自赋值
+        Widget w1 = createWidget(); // 本应移动构造、但编译器执行了拷贝消除
     }
 
     cout << "------" << endl;
     {
         Widget w1{ 1, 10, 20 };
-        w1 = std::move(w1); //移动自赋值
+        w1 = w1; // 自赋值
+    }
+
+    cout << "------" << endl;
+    {
+        Widget w1{ 1, 10, 20 };
+        w1 = std::move(w1); // 移动自赋值
     }
 }
